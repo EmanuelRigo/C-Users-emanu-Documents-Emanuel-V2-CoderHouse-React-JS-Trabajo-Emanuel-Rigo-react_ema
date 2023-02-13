@@ -1,22 +1,30 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const ItemListContainer = () => {
   const [load, setLoad] = useState(false);
   const [productos, setProductos] = useState([]);
   const props = useParams();
-  console.log(props.categoria);
 
   useEffect(() => {
-    const pedido = fetch("../datosPeliculas.json");
+    const productosCollecion = collection(db, "productos");
+    const pedidoFirestore = getDocs(productosCollecion);
 
-    pedido
-      .then((respuesta) => {
-        const productos = respuesta.json();
-        console.log(productos);
+    pedidoFirestore
+      .then((repuesta) => {
+        const productos = repuesta.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+
+        setProductos(productos);
+
         return productos;
       })
+
       .then((productos) => {
         props.categoria === undefined
           ? setProductos(productos)
@@ -27,15 +35,16 @@ const ItemListContainer = () => {
             );
         setLoad(true);
       })
+
       .catch((error) => {
-        console.log(error);
+        console.log("no se pudo cargar");
       });
-  });
+  }, [props]);
 
   return (
     <>
       {load ? null : "cargando..."}
-      <ItemList productos={productos}></ItemList>
+      <ItemList productos={productos} />
     </>
   );
 };

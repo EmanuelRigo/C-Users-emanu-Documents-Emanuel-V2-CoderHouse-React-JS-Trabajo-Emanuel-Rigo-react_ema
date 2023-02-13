@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Routes } from "react-router-dom";
+import { contexto } from "./CustomProvider";
 
 const Nav = (props) => {
   const { isHeader, textLinkFooter, hrefLinkFooter } = props;
+  const { totalProductos } = useContext(contexto);
 
   if (isHeader) {
     return (
@@ -17,8 +20,10 @@ const Nav = (props) => {
           <Link className="links" to="/peliculas/terror">
             Terror
           </Link>
+          <Link className="links" to="/peliculas/comedia">
+            Comedia
+          </Link>
         </div>
-        <span className="material-icons">shopping_cart</span>
       </nav>
     );
   } else {

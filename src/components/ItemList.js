@@ -3,8 +3,8 @@ import Item from "./Item";
 const ItemList = ({ productos }) => {
   return (
     <div className="grid-container">
-      {productos.map((producto) => {
-        return <Item producto={producto} key={producto.id} />;
+      {productos.map((pelicula) => {
+        return <Item pelicula={pelicula} key={pelicula.id} />;
       })}
     </div>
   );

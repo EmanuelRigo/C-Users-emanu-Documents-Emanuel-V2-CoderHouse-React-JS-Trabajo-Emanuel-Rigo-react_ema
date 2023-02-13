@@ -1,9 +1,27 @@
-const ItemDetail = () => {
+import ItemCount from "./ItemCount";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
+import agregarProducto from "./CustomProvider";
+
+const ItemDetail = ({ pelicula, stock = 5 }) => {
+  const onAdd = (cantidad) => {
+    agregarProducto();
+  };
+
   return (
-    <div>
-      <h1>Pelicula 4k Dolby Atmos</h1>
-      <p>Subtitulos: Ingles - Español - Frances</p>
-      <p>Idiomas: Ingles - Español Latinoamericano</p>
+    <div className="card2">
+      <div className="card-image2">
+        <img className="imagen" src={pelicula.portada} alt="" />
+      </div>
+      <div className="card-text">
+        <h2> {pelicula.title} </h2>
+      </div>
+      <div className="detalles">
+        <p> {pelicula.precio} </p>
+        <ItemCount pelicula={pelicula}></ItemCount>
+        <p> {pelicula.genero} </p>
+        <p> {pelicula.fecha} </p>
+      </div>
     </div>
   );
 };

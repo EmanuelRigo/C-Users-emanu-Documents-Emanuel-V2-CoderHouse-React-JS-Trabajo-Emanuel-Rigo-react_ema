@@ -1,4 +1,5 @@
-import Nav from "./Nav";
+import NavBar from "./NavBar";
+import CartWidget from "./CartWidget";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -11,7 +12,8 @@ const Header = () => {
           <img src="../logo.png" alt="" />
         </Link>
       </div>
-      <Nav isHeader={isHeader}></Nav>
+      <NavBar isHeader={isHeader}></NavBar>
+      <CartWidget></CartWidget>
     </header>
   );
 };
