@@ -22,7 +22,7 @@ const Carrito = () => {
               </div>
               <div className="detalles">
                 <p> {pelicula.precio} </p>
-                <button onClick={handleClick(pelicula.id)}>borrar</button>
+                <button onClick={handleClick(pelicula.id)}>eliminar</button>
               </div>
             </div>
           </div>
